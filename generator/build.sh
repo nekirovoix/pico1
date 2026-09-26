@@ -17,10 +17,12 @@ if [[ ! -d "$CP_DIR/.git" ]]; then
 fi
 
 git -C "$CP_DIR" fetch --depth 1 origin "refs/tags/$VERSION:refs/tags/$VERSION"
-git -C "$CP_DIR" checkout --detach "$VERSION"
-git -C "$CP_DIR" submodule update --init --depth 1 lib/tinyusb lib/mbedtls lib/berkeley-db-1.xx
+git -C "$CP_DIR" checkout --force --detach "$VERSION"
+git -C "$CP_DIR" clean -ffd
+make -C "$CP_DIR/ports/raspberrypi" fetch-port-submodules
 
 python3 "$ROOT/generator/generate.py" --config "$CONFIG" --out "$OUT" --circuitpython-dir "$CP_DIR"
+python3 "$ROOT/generator/patch_circuitpython.py" --config "$CONFIG" --circuitpython-dir "$CP_DIR"
 make -C "$CP_DIR/ports/raspberrypi" -j"${JOBS:-2}" BOARD="$TARGET"
 
 UF2_SRC="$CP_DIR/ports/raspberrypi/build-$TARGET/firmware.uf2"
