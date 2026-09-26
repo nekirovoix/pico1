@@ -10,6 +10,7 @@ CP_DIR="$WORK/circuitpython"
 python3 "$ROOT/generator/generate.py" --config "$CONFIG" --out "$OUT"
 VERSION="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["circuitpython_version"])' "$CONFIG")"
 TARGET="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["target_board"])' "$CONFIG")"
+LANGUAGE="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["language"])' "$CONFIG")"
 
 mkdir -p "$WORK" "$OUT"
 if [[ ! -d "$CP_DIR/.git" ]]; then
@@ -23,7 +24,8 @@ make -C "$CP_DIR/ports/raspberrypi" fetch-port-submodules
 
 python3 "$ROOT/generator/generate.py" --config "$CONFIG" --out "$OUT" --circuitpython-dir "$CP_DIR"
 python3 "$ROOT/generator/patch_circuitpython.py" --config "$CONFIG" --circuitpython-dir "$CP_DIR"
-make -C "$CP_DIR/ports/raspberrypi" -j"${JOBS:-2}" BOARD="$TARGET"
+arm-none-eabi-gcc --version | head -n 1
+make -C "$CP_DIR/ports/raspberrypi" -j"${JOBS:-2}" BOARD="$TARGET" TRANSLATION="$LANGUAGE"
 
 UF2_SRC="$CP_DIR/ports/raspberrypi/build-$TARGET/firmware.uf2"
 if [[ ! -s "$UF2_SRC" ]]; then

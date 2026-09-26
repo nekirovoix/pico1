@@ -67,8 +67,19 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential git gettext cmake ninja-build gcc-arm-none-eabi libnewlib-arm-none-eabi
+          sudo apt-get install -y build-essential git curl xz-utils gettext cmake ninja-build
           python3 -m pip install --upgrade pip
+      - name: Install Arm GNU Toolchain 14.3
+        run: |
+          TOOLCHAIN_ARCHIVE=arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz
+          TOOLCHAIN_URL="https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/$TOOLCHAIN_ARCHIVE"
+          curl --fail --location --retry 3 --output "/tmp/$TOOLCHAIN_ARCHIVE" "$TOOLCHAIN_URL"
+          tar -xJf "/tmp/$TOOLCHAIN_ARCHIVE" -C "$HOME"
+          echo "$HOME/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi/bin" >> "$GITHUB_PATH"
+      - name: Verify Arm compiler
+        run: |
+          arm-none-eabi-gcc --version | head -n 1
+          case "$(arm-none-eabi-gcc -dumpfullversion)" in 14.*) ;; *) echo 'GCC 14 is required' >&2; exit 1;; esac
       - name: Prepare CircuitPython Python dependencies
         run: |
           VERSION="$(python3 -c 'import json,os; print(json.load(open(os.environ["CONFIG_PATH"]))["circuitpython_version"])')"
