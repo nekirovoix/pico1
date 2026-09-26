@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="فرم زنده ساخت تنظیمات فریمور Raspberry Pi Pico">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Pico Firmware Studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#configurator">رفتن به فرم</a>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="صفحه اصلی Pico Firmware Studio">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span><strong>Pico Firmware Studio</strong><small>Classroom Studio</small></span>
+    </a>
+    <nav aria-label="پیوندهای اصلی">
+      <a href="https://github.com/nekirovoix/pico1" target="_blank" rel="noopener">مخزن GitHub</a>
+      <a href="https://github.com/nekirovoix/pico1/actions" target="_blank" rel="noopener">وضعیت ساخت</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <span class="eyebrow">سازنده فریمور بدون نیاز به WSL</span>
+        <h1 id="page-title">فریمور Pico را ساده و مطمئن شخصی‌سازی کنید</h1>
+        <p>تنظیمات را وارد کنید، همان‌جا اعتبارسنجی کنید و فایل آمادهٔ GitHub Actions را دریافت کنید.</p>
+      </div>
+      <ol class="flow" aria-label="مراحل ساخت">
+        <li><span>۱</span>تنظیم</li><li><span>۲</span>دریافت JSON</li><li><span>۳</span>ثبت در GitHub</li><li><span>۴</span>ساخت UF2</li>
+      </ol>
+    </section>
+
+    <div class="layout">
+      <form id="configurator" novalidate>
+        <section class="panel" aria-labelledby="general-title">
+          <div class="section-heading"><span class="step">۱</span><div><h2 id="general-title">پایه و نسخه</h2><p>برد و نسخهٔ مبنای CircuitPython</p></div></div>
+          <div class="grid two">
+            <label>نسخه CircuitPython<input id="circuitpython_version" name="circuitpython_version" value="10.3.0" inputmode="decimal" aria-describedby="circuitpython_version-help circuitpython_version-error"><small id="circuitpython_version-help">نمونه: 10.3.0</small><span class="error" id="circuitpython_version-error"></span></label>
+            <label>زبان فریمور<input id="language" name="language" value="en_US" dir="ltr" aria-describedby="language-help language-error"><small id="language-help">قالب زبان و منطقه، مانند en_US</small><span class="error" id="language-error"></span></label>
+            <label>برد مبدأ<input id="source_board" name="source_board" value="raspberry_pi_pico" dir="ltr" aria-describedby="source_board-error"><span class="error" id="source_board-error"></span></label>
+            <label>نام برد سفارشی<input id="target_board" name="target_board" value="classroom_studio_pico" dir="ltr" aria-describedby="target_board-error"><span class="error" id="target_board-error"></span></label>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="usb-title">
+          <div class="section-heading"><span class="step">۲</span><div><h2 id="usb-title">شناسه USB</h2><p>نامی که سیستم‌عامل برای دستگاه می‌بیند</p></div></div>
+          <div class="grid two">
+            <label>سازنده USB<input id="usb_manufacturer" name="usb_manufacturer" value="Classroom Studio" dir="ltr" aria-describedby="usb_manufacturer-help usb_manufacturer-error"><small id="usb_manufacturer-help">فقط ASCII چاپ‌پذیر</small><span class="error" id="usb_manufacturer-error"></span></label>
+            <label>نام محصول USB<input id="usb_product" name="usb_product" value="Classroom Studio" dir="ltr" aria-describedby="usb_product-help usb_product-error"><small id="usb_product-help">فقط ASCII چاپ‌پذیر</small><span class="error" id="usb_product-error"></span></label>
+            <label>VID<input id="usb_vid" name="usb_vid" value="0x239A" dir="ltr" maxlength="6" aria-describedby="vid-warning usb_vid-error"><span class="error" id="usb_vid-error"></span></label>
+            <label>PID<input id="usb_pid" name="usb_pid" value="0x80F4" dir="ltr" maxlength="6" aria-describedby="vid-warning usb_pid-error"><span class="error" id="usb_pid-error"></span></label>
+            <label class="wide">پیشوند شماره سریال<input id="serial_prefix" name="serial_prefix" value="CLASSROOM-" dir="ltr" maxlength="24" aria-describedby="serial_prefix-help serial_prefix-error"><small id="serial_prefix-help">به شناسه یکتای سخت‌افزاری Pico اضافه می‌شود.</small><span class="error" id="serial_prefix-error"></span></label>
+          </div>
+          <div class="notice warning" id="vid-warning" role="note"><strong>توجه حقوقی:</strong> VID/PID پیش‌فرض متعلق به Adafruit است. برای محصول نهایی باید مجوز معتبر یا VID/PID قانونی خودتان را داشته باشید.</div>
+        </section>
+
+        <section class="panel" aria-labelledby="storage-title">
+          <div class="section-heading"><span class="step">۳</span><div><h2 id="storage-title">درایو و بازیابی</h2><p>رفتار حافظه USB و حالت تعمیر</p></div></div>
+          <div class="grid two">
+            <label>نام درایو<input id="drive_label" name="drive_label" value="CLASSROOM" dir="ltr" maxlength="11" aria-describedby="drive_label-help drive_label-error"><small id="drive_label-help">۱ تا ۱۱ حرف بزرگ، عدد، خط تیره یا زیرخط</small><span class="error" id="drive_label-error"></span></label>
+            <label>پین حالت تعمیر<input id="maintenance_pin" name="maintenance_pin" value="GP3" dir="ltr" aria-describedby="maintenance_pin-help maintenance_pin-error"><small id="maintenance_pin-help">در حالت تعمیر به GND متصل می‌شود؛ هرگز به 3.3V وصل نکنید.</small><span class="error" id="maintenance_pin-error"></span></label>
+          </div>
+          <fieldset>
+            <legend>حالت نمایش درایو</legend>
+            <div class="mode-grid">
+              <label class="mode"><input type="radio" name="drive_mode" value="maintenance" checked><span><strong>حالت تعمیر</strong><small>عادی مخفی؛ با اتصال پین به GND نمایان</small></span></label>
+              <label class="mode"><input type="radio" name="drive_mode" value="always"><span><strong>همیشه نمایان</strong><small>مناسب توسعه و تغییر مداوم فایل‌ها</small></span></label>
+              <label class="mode"><input type="radio" name="drive_mode" value="hidden"><span><strong>همیشه مخفی</strong><small>بازیابی همچنان با BOOTSEL ممکن است</small></span></label>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="panel actions-panel" aria-labelledby="export-title">
+          <div class="section-heading"><span class="step">۴</span><div><h2 id="export-title">دریافت و ساخت</h2><p>فایل تنظیمات را بگیرید و در مخزن ثبت کنید</p></div></div>
+          <div id="form-status" class="notice success" role="status" aria-live="polite">تنظیمات معتبر و آمادهٔ دریافت است.</div>
+          <div class="actions">
+            <button class="primary" id="download" type="button">دریافت config.json</button>
+            <button class="secondary" id="copy" type="button">کپی JSON</button>
+            <button class="secondary" id="edit-github" type="button">بازکردن ویرایشگر GitHub</button>
+            <a class="button ghost" href="https://github.com/nekirovoix/pico1/actions/workflows/build-release.yml" target="_blank" rel="noopener">اجرای ساخت</a>
+          </div>
+          <p class="next-step"><strong>روال پیشنهادی:</strong> JSON را کپی کنید، ویرایشگر GitHub را باز کنید، تمام محتوای فایل را جایگزین و Commit کنید. ساخت ابری خودکار شروع می‌شود.</p>
+        </section>
+      </form>
+
+      <aside class="preview" aria-labelledby="preview-title">
+        <div class="preview-head"><div><span class="status-dot" aria-hidden="true"></span><h2 id="preview-title">پیش‌نمایش تنظیمات</h2></div><button id="reset" type="button">بازنشانی</button></div>
+        <pre id="json-preview" dir="ltr" tabindex="0" aria-label="پیش‌نمایش JSON"></pre>
+        <dl class="summary">
+          <div><dt>خروجی</dt><dd>UF2 + boot.py</dd></div>
+          <div><dt>ساخت</dt><dd>GitHub Actions</dd></div>
+          <div><dt>سیستم</dt><dd>Windows x64</dd></div>
+        </dl>
+        <div class="notice info"><strong>امنیت:</strong> این صفحه هیچ توکن یا رمزی دریافت نمی‌کند و اطلاعات فرم فقط در مرورگر شما ذخیره می‌شود.</div>
+      </aside>
+    </div>
+  </main>
+
+  <footer><p>پنهان‌کردن درایو رمزنگاری یا Secure Boot نیست. BOOTSEL همیشه مسیر بازیابی RPI-RP2 را فراهم می‌کند.</p></footer>
+  <script src="app.js"></script>
+</body>
+</html>
