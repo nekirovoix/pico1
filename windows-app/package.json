@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron .",
     "check": "node --check main.js && node --check preload.js && node --check renderer.js",
-    "package": "electron-packager . Classroom-Studio-Firmware --platform=win32 --arch=x64 --overwrite --out=out --ignore='(^|/)(out|node_modules/.cache)(/|$)'"
+    "package": "electron-packager . Classroom-Studio-Firmware --platform=win32 --arch=x64 --overwrite --out=out"
   },
   "devDependencies": {
     "electron": "38.8.6",
