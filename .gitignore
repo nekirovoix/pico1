@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+out/
+release/
+*.zip
+*.uf2
+generator/dist/*
+!generator/dist/.gitkeep
+build-work/
+.DS_Store
