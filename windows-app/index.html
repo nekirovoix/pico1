@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Classroom Studio Firmware</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside>
+    <h1>Classroom Studio</h1>
+    <button class="nav active" data-page="prepare">آماده‌سازی Pico</button>
+    <button class="nav" data-page="configure">تنظیم فریمور</button>
+    <button class="nav" data-page="about">درباره</button>
+  </aside>
+  <main>
+    <section id="prepare" class="page active">
+      <h2>آماده‌سازی Pico</h2>
+      <p class="hint">فقط درایوهای RPI-RP2، CIRCUITPY، CLASSROOM یا برچسب پیکربندی‌شده نمایش داده می‌شوند.</p>
+      <div class="toolbar"><button id="scan">بازخوانی درایوها</button><button id="verify">بررسی SHA256 فریمور</button></div>
+      <div id="drives" class="cards"></div>
+      <h3>گزارش عملیات</h3><pre id="log"></pre>
+    </section>
+    <section id="configure" class="page">
+      <h2>تنظیم فریمور</h2>
+      <p class="hint">تنظیمات را ویرایش و JSON را دریافت کنید؛ سپس آن را در پوشه config مخزن قرار دهید و Workflow را اجرا کنید.</p>
+      <form id="configForm"></form>
+      <div class="toolbar"><button type="button" id="downloadConfig">دریافت config.json</button><button type="button" id="actions">بازکردن GitHub Actions</button></div>
+      <p class="warning">هشدار: VID/PID پیش‌فرض 0x239A/0x80F4 متعلق به Adafruit است. برای محصول نهایی باید مجوز قانونی داشته باشید.</p>
+    </section>
+    <section id="about" class="page">
+      <h2>درباره</h2>
+      <p>این برنامه UF2 را قبل از کپی با SHA256 بررسی می‌کند و هیچ درایوی را فرمت یا پاک نمی‌کند.</p>
+      <p>پنهان‌کردن درایو رمزنگاری یا Secure Boot نیست.</p>
+    </section>
+  </main>
+  <script src="renderer.js"></script>
+</body>
+</html>
