@@ -90,7 +90,10 @@ ipcMain.handle('firmware:verify', async () => {
 });
 ipcMain.handle('pico:installBoot', async (_event, root) => {
   const drive = await requireDrive(root);
-  if (!['CIRCUITPY', 'CLASSROOM'].includes(drive.label)) throw new Error('boot.py can only be installed on CIRCUITPY or CLASSROOM.');
+  const config = await readConfig();
+  const runtimeLabels = new Set(['CIRCUITPY', 'CLASSROOM']);
+  if (config?.drive_label) runtimeLabels.add(config.drive_label);
+  if (!runtimeLabels.has(drive.label)) throw new Error('boot.py can only be installed on a recognized CircuitPython runtime drive.');
   const source = path.join(DIST, 'boot.py');
   const destination = path.join(drive.root, 'boot.py');
   const backup = path.join(drive.root, 'boot.py.before-classroom');
