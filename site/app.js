@@ -10,12 +10,11 @@ const status = document.querySelector('#form-status');
 const actionIds = ['download', 'copy', 'edit-github'];
 const editUrl = 'https://github.com/nekirovoix/pico1/edit/main/config/default.json';
 const storageKey = 'pico1-live-config-v2';
-const TEST_USB_PIDS = Object.freeze(Array.from({length: 16}, (_, index) => index + 1));
-
-function randomTestPid() {
-  const sample = new Uint32Array(1);
+function randomUsbId() {
+  const sample = new Uint16Array(1);
   crypto.getRandomValues(sample);
-  return TEST_USB_PIDS[sample[0] % TEST_USB_PIDS.length];
+  const value = 0x1000 + (sample[0] % 0xEFFF);
+  return `0x${value.toString(16).toUpperCase().padStart(4, '0')}`;
 }
 
 function values() { return Object.fromEntries(Object.keys(DEFAULTS).map(key => [key, key === 'drive_mode' ? form.elements.drive_mode.value : form.elements[key].value.trim()])); }
@@ -64,10 +63,9 @@ form.addEventListener('input',update);
 document.querySelector('#download').addEventListener('click',()=>{if(!update())return;const blob=new Blob([canonical(values())],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='config.json';link.click();URL.revokeObjectURL(url);});
 document.querySelector('#copy').addEventListener('click',async()=>{if(!update())return;try{await copyJson();}catch{status.textContent='مرورگر اجازهٔ کپی نداد؛ متن پیش‌نمایش را دستی کپی کنید.';status.classList.add('invalid');}});
 document.querySelector('#generate-test-usb-id').addEventListener('click',()=>{
-  const pid = randomTestPid();
-  form.elements.usb_vid.value = '0x1209';
-  form.elements.usb_pid.value = `0x${pid.toString(16).toUpperCase().padStart(4, '0')}`;
-  document.querySelector('#usb-id-status').textContent = `شناسهٔ آزمایشی ${form.elements.usb_vid.value}:${form.elements.usb_pid.value} تولید شد؛ فقط برای تست خصوصی استفاده کنید.`;
+  form.elements.usb_vid.value = randomUsbId();
+  form.elements.usb_pid.value = randomUsbId();
+  document.querySelector('#usb-id-status').textContent = `شناسهٔ تصادفی ${form.elements.usb_vid.value}:${form.elements.usb_pid.value} تولید شد؛ فقط برای تست خصوصی استفاده کنید.`;
   update();
 });
 document.querySelector('#edit-github').addEventListener('click',async()=>{if(!update())return;const tab=window.open(editUrl,'_blank');if(tab)tab.opener=null;try{await navigator.clipboard.writeText(canonical(values()));status.textContent='JSON کپی شد؛ در ویرایشگر GitHub جای‌گذاری و Commit کنید.';}catch{status.textContent='ویرایشگر باز شد؛ JSON را دستی کپی کنید.';}if(!tab)window.location.href=editUrl;});

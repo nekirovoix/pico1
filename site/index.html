@@ -43,12 +43,12 @@
             <label>VID<input id="usb_vid" name="usb_vid" value="0x238A" dir="ltr" maxlength="6" aria-describedby="vid-warning usb_vid-error"><span class="error" id="usb_vid-error"></span></label>
             <label>PID<input id="usb_pid" name="usb_pid" value="0x80F5" dir="ltr" maxlength="6" aria-describedby="vid-warning usb_pid-error"><span class="error" id="usb_pid-error"></span></label>
             <div class="wide">
-              <div class="actions"><button class="secondary" id="generate-test-usb-id" type="button">تولید VID/PID آزمایشی تصادفی</button></div>
-              <small id="usb-id-status" role="status" aria-live="polite">VID آزمایشی 0x1209 و یکی از PIDهای تست 0x0001 تا 0x0010 انتخاب می‌شود.</small>
+              <div class="actions"><button class="secondary" id="generate-test-usb-id" type="button">تولید VID/PID کاملاً تصادفی</button></div>
+              <small id="usb-id-status" role="status" aria-live="polite">هر دو شناسه از بازهٔ 0x1000 تا 0xFFFE ساخته می‌شوند تا چهاررقمی و متنوع باشند.</small>
             </div>
             <label class="wide">پیشوند شماره سریال<input id="serial_prefix" name="serial_prefix" value="CLASSROOM-" dir="ltr" maxlength="24" aria-describedby="serial_prefix-help serial_prefix-error"><small id="serial_prefix-help">به شناسه یکتای سخت‌افزاری Pico اضافه می‌شود.</small><span class="error" id="serial_prefix-error"></span></label>
           </div>
-          <div class="notice warning" id="vid-warning" role="note"><strong>توجه:</strong> شناسهٔ تولیدشده فقط برای تست خصوصی و کلاس است؛ برای انتشار، فروش یا تولید باید PID اختصاصی و مجوز معتبر داشته باشید. USB Class دستگاه با VID/PID تعیین نمی‌شود.</div>
+          <div class="notice warning" id="vid-warning" role="note"><strong>توجه:</strong> شناسهٔ کاملاً تصادفی فقط برای تست خصوصی و کلاس است و یکتا یا دارای مجوز بودن آن تضمین نمی‌شود؛ برای انتشار، فروش یا تولید باید VID/PID قانونی بگیرید. USB Class دستگاه با VID/PID تعیین نمی‌شود.</div>
         </section>
 
         <section class="panel" aria-labelledby="storage-title">
