@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from generator.generate import render_boot_py, validate_config, write_outputs
+from generator.generate import render_board_mk, render_boot_py, validate_config, write_outputs
 
 BASE = {
     "circuitpython_version": "10.3.0",
@@ -49,6 +49,11 @@ class ValidationTests(unittest.TestCase):
         self.assertIn("board.GP3", maintenance)
         self.assertIn("disable_usb_drive", hidden)
         self.assertNotIn("disable_usb_drive", always)
+
+    def test_usb_strings_are_c_literals(self):
+        board_mk = render_board_mk(BASE)
+        self.assertIn('USB_PRODUCT = "Classroom Studio"', board_mk)
+        self.assertIn('USB_MANUFACTURER = "Classroom Studio"', board_mk)
 
     def test_writes_auditable_outputs(self):
         with tempfile.TemporaryDirectory() as tmp:
