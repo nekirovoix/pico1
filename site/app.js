@@ -111,7 +111,8 @@ document.querySelector('#copy').addEventListener('click', async () => {
 });
 document.querySelector('#edit-github').addEventListener('click', async () => {
   if (!update()) return;
-  const tab = window.open(editUrl, '_blank', 'noopener');
+  const tab = window.open(editUrl, '_blank');
+  if (tab) tab.opener = null;
   try { await navigator.clipboard.writeText(canonical(values())); status.textContent = 'JSON کپی شد؛ در ویرایشگر GitHub جای‌گذاری و Commit کنید.'; }
   catch { status.textContent = 'ویرایشگر باز شد؛ JSON را از پیش‌نمایش دستی کپی کنید.'; }
   if (!tab) window.location.href = editUrl;

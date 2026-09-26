@@ -2,6 +2,10 @@
 
 A validated, reproducible CircuitPython firmware generator and safe Windows preparation app for Raspberry Pi Pico.
 
+## Live configurator
+
+Open the Persian live form at **https://nekirovoix.github.io/pico1/** to customize, validate, preview, copy, and download the firmware configuration without installing anything.
+
 ## What it builds
 
 - custom CircuitPython `.uf2`
