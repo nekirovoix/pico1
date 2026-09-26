@@ -50,6 +50,12 @@ class ValidationTests(unittest.TestCase):
         self.assertIn("disable_usb_drive", hidden)
         self.assertNotIn("disable_usb_drive", always)
 
+    def test_boot_restores_readonly_in_finally(self):
+        boot = render_boot_py(BASE)
+        self.assertIn("finally:", boot)
+        self.assertIn("filesystem_writable", boot)
+        self.assertEqual(boot.count("storage.remount"), 2)
+
     def test_usb_strings_are_c_literals(self):
         board_mk = render_board_mk(BASE)
         self.assertIn('USB_PRODUCT = "Classroom Studio"', board_mk)
@@ -64,6 +70,7 @@ class ValidationTests(unittest.TestCase):
             write_outputs(config, out)
             self.assertTrue((out / "boot.py").is_file())
             manifest = json.loads((out / "build-manifest.json").read_text())
+            self.assertEqual(manifest["schema"], 2)
             self.assertEqual(manifest["configuration"]["target_board"], "classroom_studio_pico")
 
 
