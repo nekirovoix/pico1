@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUBF14",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "BF14-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "bright_future_institute_14",
+  "usb_manufacturer": "Bright Future Institute",
+  "usb_pid": "0xEF9C",
+  "usb_product": "Student Project Gateway",
+  "usb_vid": "0x7F5F"
+}

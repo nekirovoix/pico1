@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUMB23",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "MB23-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "meadowbrook_academy_23",
+  "usb_manufacturer": "Meadowbrook Academy",
+  "usb_pid": "0x38B7",
+  "usb_product": "Education USB Terminal",
+  "usb_vid": "0x7718"
+}

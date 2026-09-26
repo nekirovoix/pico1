@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUSO16",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "SO16-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "silver_oak_university_16",
+  "usb_manufacturer": "Silver Oak University",
+  "usb_pid": "0x7E26",
+  "usb_product": "Chemistry Lab Interface",
+  "usb_vid": "0x3F5B"
+}

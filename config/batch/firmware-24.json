@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUMV24",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "MV24-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "mountainview_college_24",
+  "usb_manufacturer": "Mountainview College",
+  "usb_pid": "0x8895",
+  "usb_product": "Geology Sensor Interface",
+  "usb_vid": "0x7EF0"
+}

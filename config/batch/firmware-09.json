@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDURP09",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "RP09-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "riverside_polytechnic_09",
+  "usb_manufacturer": "Riverside Polytechnic",
+  "usb_pid": "0x616A",
+  "usb_product": "Automation Interface",
+  "usb_vid": "0xDE30"
+}

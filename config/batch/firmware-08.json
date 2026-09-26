@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUPS08",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "PS08-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "pioneer_science_academy_08",
+  "usb_manufacturer": "Pioneer Science Academy",
+  "usb_pid": "0xDD08",
+  "usb_product": "Physics Measurement Port",
+  "usb_vid": "0x2419"
+}

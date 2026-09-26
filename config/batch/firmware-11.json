@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUGE11",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "GE11-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "greenfield_engineering_college_11",
+  "usb_manufacturer": "Greenfield Engineering College",
+  "usb_pid": "0x371D",
+  "usb_product": "Prototype Serial Adapter",
+  "usb_vid": "0xABB6"
+}

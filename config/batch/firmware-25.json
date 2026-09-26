@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDURU25",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "RU25-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "riverbend_university_25",
+  "usb_manufacturer": "Riverbend University",
+  "usb_pid": "0xA065",
+  "usb_product": "Energy Systems Link",
+  "usb_vid": "0x4AE0"
+}

@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUCT13",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "CT13-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "central_technology_university_13",
+  "usb_manufacturer": "Central Technology University",
+  "usb_pid": "0xBA7F",
+  "usb_product": "Embedded Systems Console",
+  "usb_vid": "0x27F0"
+}

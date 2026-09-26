@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUSP27",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "SP27-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "starlight_polytechnic_27",
+  "usb_manufacturer": "Starlight Polytechnic",
+  "usb_pid": "0xF2D9",
+  "usb_product": "Optical Research Port",
+  "usb_vid": "0xD658"
+}

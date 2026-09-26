@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUSS22",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "SS22-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "sunrise_science_university_22",
+  "usb_manufacturer": "Sunrise Science University",
+  "usb_pid": "0xD44F",
+  "usb_product": "Biology Lab Gateway",
+  "usb_vid": "0xC20D"
+}

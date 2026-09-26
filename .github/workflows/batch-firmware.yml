@@ -1,0 +1,72 @@
+name: Build 30 distinct firmware variants sequentially
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['config/batch/**', '.github/workflows/batch-firmware.yml']
+permissions:
+  contents: read
+concurrency:
+  group: pico1-batch-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      configs: ${{ steps.matrix.outputs.configs }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: matrix
+        shell: bash
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+          configs = [str(p) for p in sorted(Path('config/batch').glob('firmware-*.json'))]
+          if len(configs) != 30: raise SystemExit(f'Expected 30 configs, found {len(configs)}')
+          print('configs=' + json.dumps(configs, separators=(',', ':')))
+          PY
+  build-firmware:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        config: ${{ fromJson(needs.prepare.outputs.configs) }}
+    env:
+      CONFIG_PATH: ${{ matrix.config }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - id: meta
+        run: echo "artifact=$(basename "$CONFIG_PATH" .json)" >> "$GITHUB_OUTPUT"
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential git curl xz-utils gettext cmake ninja-build
+          python3 -m pip install --upgrade pip
+      - name: Install Arm GNU Toolchain 14.3
+        run: |
+          A=arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi.tar.xz
+          curl --fail --location --retry 3 -o "/tmp/$A" "https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/$A"
+          tar -xJf "/tmp/$A" -C "$HOME"
+          echo "$HOME/arm-gnu-toolchain-14.3.rel1-x86_64-arm-none-eabi/bin" >> "$GITHUB_PATH"
+      - name: Prepare CircuitPython dependencies
+        run: |
+          V="$(python3 -c 'import json,os;print(json.load(open(os.environ["CONFIG_PATH"]))["circuitpython_version"])')"
+          git clone --depth 1 --branch "$V" https://github.com/adafruit/circuitpython.git build-work/circuitpython
+          python3 -m pip install -r build-work/circuitpython/requirements-dev.txt
+      - name: Build and verify
+        env: {JOBS: '2'}
+        run: |
+          bash generator/build.sh "$CONFIG_PATH"
+          (cd generator/dist && sha256sum -c SHA256SUMS.txt)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pico1-${{ steps.meta.outputs.artifact }}
+          path: generator/dist/
+          if-no-files-found: error
+          retention-days: 30

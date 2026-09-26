@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUHT07",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "HT07-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "horizon_technical_institute_07",
+  "usb_manufacturer": "Horizon Technical Institute",
+  "usb_pid": "0x9E1D",
+  "usb_product": "Electronics Service Console",
+  "usb_vid": "0xFC2B"
+}

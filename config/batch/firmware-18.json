@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDURS18",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "RS18-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "redstone_polytechnic_18",
+  "usb_manufacturer": "Redstone Polytechnic",
+  "usb_pid": "0x530D",
+  "usb_product": "Mechatronics Debug Link",
+  "usb_vid": "0xE52A"
+}

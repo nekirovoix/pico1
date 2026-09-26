@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUOR21",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "OR21-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "oakwood_research_institute_21",
+  "usb_manufacturer": "Oakwood Research Institute",
+  "usb_pid": "0x15BB",
+  "usb_product": "Instrument Data Console",
+  "usb_vid": "0xEF32"
+}

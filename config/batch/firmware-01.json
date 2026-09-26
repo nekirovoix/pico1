@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUNB01",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "NB01-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "northbridge_university_01",
+  "usb_manufacturer": "Northbridge University",
+  "usb_pid": "0xC5DE",
+  "usb_product": "Campus Serial Gateway",
+  "usb_vid": "0x6BA8"
+}

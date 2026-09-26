@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUND12",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "ND12-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "nova_digital_academy_12",
+  "usb_manufacturer": "Nova Digital Academy",
+  "usb_pid": "0xBE60",
+  "usb_product": "Learning Terminal",
+  "usb_vid": "0x30F8"
+}

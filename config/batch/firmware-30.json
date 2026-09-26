@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUET30",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "ET30-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "elmwood_technical_academy_30",
+  "usb_manufacturer": "Elmwood Technical Academy",
+  "usb_pid": "0x7ABB",
+  "usb_product": "Innovation Device Link",
+  "usb_vid": "0x46AA"
+}

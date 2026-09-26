@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUCV05",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "CV05-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "cedar_valley_university_05",
+  "usb_manufacturer": "Cedar Valley University",
+  "usb_pid": "0xF2EB",
+  "usb_product": "Engineering Debug Port",
+  "usb_vid": "0x6246"
+}

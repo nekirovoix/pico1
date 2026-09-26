@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUPI26",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "PI26-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "pinecrest_institute_26",
+  "usb_manufacturer": "Pinecrest Institute",
+  "usb_pid": "0x899F",
+  "usb_product": "Computer Lab Console",
+  "usb_vid": "0xF86C"
+}

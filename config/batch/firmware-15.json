@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUBR15",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "BR15-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "blue_ridge_college_15",
+  "usb_manufacturer": "Blue Ridge College",
+  "usb_pid": "0x82AA",
+  "usb_product": "Campus Network Adapter",
+  "usb_vid": "0x497E"
+}

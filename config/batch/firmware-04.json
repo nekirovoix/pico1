@@ -1,0 +1,15 @@
+{
+  "circuitpython_version": "10.3.0",
+  "drive_label": "EDUSF04",
+  "drive_mode": "maintenance",
+  "language": "en_US",
+  "maintenance_pin": "GP3",
+  "runtime_profile": "classroom_guard",
+  "serial_prefix": "SF04-",
+  "source_board": "raspberry_pi_pico",
+  "target_board": "southfield_academy_04",
+  "usb_manufacturer": "Southfield Academy",
+  "usb_pid": "0xE0AA",
+  "usb_product": "Laboratory Sensor Hub",
+  "usb_vid": "0xAF7B"
+}
