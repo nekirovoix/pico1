@@ -17,6 +17,7 @@ BASE = {
     "drive_label": "CLASSROOM",
     "maintenance_pin": "GP3",
     "drive_mode": "maintenance",
+    "runtime_profile": "standard",
     "language": "en_US",
 }
 
@@ -25,10 +26,13 @@ class ValidationTests(unittest.TestCase):
     def test_default_is_valid(self):
         self.assertEqual(validate_config(BASE)["usb_vid"], "0x239A")
 
+    def test_legacy_config_defaults_to_standard_profile(self):
+        legacy = {key: value for key, value in BASE.items() if key != "runtime_profile"}
+        self.assertEqual(validate_config(legacy)["runtime_profile"], "standard")
+
     def test_rejects_non_ascii_usb_name(self):
-        cfg = {**BASE, "usb_product": "کلاس"}
         with self.assertRaisesRegex(ValueError, "ASCII"):
-            validate_config(cfg)
+            validate_config({**BASE, "usb_product": "کلاس"})
 
     def test_rejects_bad_vid(self):
         with self.assertRaisesRegex(ValueError, "usb_vid"):
@@ -47,14 +51,26 @@ class ValidationTests(unittest.TestCase):
         hidden = render_boot_py({**BASE, "drive_mode": "hidden"})
         always = render_boot_py({**BASE, "drive_mode": "always"})
         self.assertIn("board.GP3", maintenance)
-        self.assertIn("disable_usb_drive", hidden)
-        self.assertNotIn("disable_usb_drive", always)
+        self.assertIn("show_drive = False", hidden)
+        self.assertIn("show_drive = True", always)
 
-    def test_boot_restores_readonly_in_finally(self):
+    def test_standard_boot_restores_readonly_in_finally(self):
         boot = render_boot_py(BASE)
         self.assertIn("finally:", boot)
-        self.assertIn("filesystem_writable", boot)
-        self.assertEqual(boot.count("storage.remount"), 2)
+        self.assertIn("Filesystem safety remount failed", boot)
+
+    def test_guard_boot_preserves_runtime_requirements(self):
+        boot = render_boot_py({**BASE, "runtime_profile": "classroom_guard"})
+        self.assertIn("usb_cdc.enable(console=True, data=True)", boot)
+        self.assertIn("import usb_hid", boot)
+        self.assertIn("storage.disable_usb_drive()", boot)
+        self.assertIn("storage.remount('/', readonly=False)", boot)
+        self.assertIn("Maintenance mode: host-visible storage stays read-only", boot)
+        self.assertIn("calibration JSON", boot)
+
+    def test_guard_rejects_always_visible_drive(self):
+        with self.assertRaisesRegex(ValueError, "writes would conflict"):
+            validate_config({**BASE, "runtime_profile": "classroom_guard", "drive_mode": "always"})
 
     def test_usb_strings_are_c_literals(self):
         board_mk = render_board_mk(BASE)

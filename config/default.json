@@ -10,5 +10,6 @@
   "drive_label": "CLASSROOM",
   "maintenance_pin": "GP3",
   "drive_mode": "maintenance",
+  "runtime_profile": "classroom_guard",
   "language": "en_US"
 }
