@@ -98,12 +98,19 @@ def render_boot_py(cfg: dict) -> str:
     elif mode == "hidden":
         lines += ["storage.disable_usb_drive()", ""]
     lines += [
+        "filesystem_writable = False",
         "try:",
         "    storage.remount('/', readonly=False)",
+        "    filesystem_writable = True",
         f"    storage.getmount('/').label = {_py(cfg['drive_label'])}",
-        "    storage.remount('/', readonly=True)",
         "except Exception as exc:",
         "    print('Drive label update skipped:', exc)",
+        "finally:",
+        "    if filesystem_writable:",
+        "        try:",
+        "            storage.remount('/', readonly=True)",
+        "        except Exception as exc:",
+        "            print('Filesystem safety remount failed:', exc)",
         "",
     ]
     return "\n".join(lines)
@@ -145,7 +152,7 @@ def write_outputs(config_path: Path, out_dir: Path, circuitpython_dir: Path | No
             handle.write("\n" + render_board_mk(cfg))
 
     manifest = {
-        "schema": 1,
+        "schema": 2,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "configuration": cfg,
         "config_sha256": hashlib.sha256(canonical.encode()).hexdigest(),
