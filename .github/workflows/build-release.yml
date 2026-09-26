@@ -44,7 +44,7 @@ jobs:
           config_root = (root / 'config').resolve()
           selected = (root / os.environ['CONFIG_PATH']).resolve()
           if config_root not in selected.parents or selected.suffix != '.json' or not selected.is_file():
-              raise SystemExit('config_path must identify an existing JSON file directly under config/')
+              raise SystemExit('config_path must identify an existing JSON file under config/')
           PY
       - name: Unit tests
         run: python3 -m unittest discover -s tests -v
@@ -64,7 +64,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: pip
       - name: Install build dependencies
         run: |
           sudo apt-get update
@@ -97,8 +96,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: npm
-          cache-dependency-path: windows-app/package-lock.json
       - uses: actions/download-artifact@v4
         with:
           name: pico1-firmware
